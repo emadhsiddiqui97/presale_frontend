@@ -3,12 +3,17 @@ import { AnchorProvider, Program } from "@project-serum/anchor";
 import { AnchorWallet } from "@solana/wallet-adapter-react";
 import { getAdminAta, getPresalePDA, getVaultPDA } from "./helpers";
 import * as anchor from "@project-serum/anchor";
-import { PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY } from "@solana/web3.js";
+import {
+  PublicKey,
+  SystemProgram,
+  SYSVAR_RENT_PUBKEY,
+  LAMPORTS_PER_SOL,
+} from "@solana/web3.js";
 import {
   getAssociatedTokenAddress,
   ASSOCIATED_TOKEN_PROGRAM_ID,
   TOKEN_PROGRAM_ID,
-  TOKEN_2022_PROGRAM_ID,
+  // TOKEN_2022_PROGRAM_ID,
 } from "@solana/spl-token";
 
 export const withdrawToken = async (
@@ -16,8 +21,9 @@ export const withdrawToken = async (
   amount: number,
   tokenAddress: PublicKey
 ) => {
-  const [presalePDA] = await getPresalePDA();
-  const [vaultPDA, bump] = await getVaultPDA();
+  amount = amount * LAMPORTS_PER_SOL;
+  const [presalePDA, bump] = await getPresalePDA();
+  // const [vaultPDA] = await getVaultPDA();
   const provider = new AnchorProvider(connection, wallet, {});
   const program = new Program(idlFile, programID, provider);
   const presaleAta = await getAssociatedTokenAddress(
@@ -25,9 +31,9 @@ export const withdrawToken = async (
     presalePDA,
     true
   );
-  const adminAta = await getAdminAta(tokenAddress, wallet);
+  const adminAta = await getAdminAta(tokenAddress);
   try {
-    const transaction = program.methods
+    const transaction = await program.methods
       .withdrawToken(new anchor.BN(amount), new anchor.BN(bump))
       .accounts({
         mintAccount: tokenAddress,
@@ -46,7 +52,7 @@ export const withdrawToken = async (
       "token withdrawn successfully: ",
       `https://explorer.solana.com/tx/${transaction}?cluster=devnet`
     );
-  } catch (error: any) {
+  } catch (error: any | unknown) {
     console.error("test faied: ", error.message);
   }
 };

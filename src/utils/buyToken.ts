@@ -1,7 +1,7 @@
 import { connection, idlFile, presaleAuthority, programID } from "@/constants";
 import { AnchorWallet } from "@solana/wallet-adapter-react";
 import {
-  PublicKey,
+  // PublicKey,
   SystemProgram,
   SYSVAR_RENT_PUBKEY,
   LAMPORTS_PER_SOL,
@@ -13,15 +13,11 @@ import {
 } from "@solana/spl-token";
 import * as anchor from "@project-serum/anchor";
 
-export const buyToken = async (
-  wallet: AnchorWallet,
-  tokenAmount: number,
-  quoteAmount: number
-) => {
+export const buyToken = async (wallet: AnchorWallet, quoteAmount: number) => {
   //token amount and quote amount are in lamport. token amount will be cliamed by the user in the claimToken function
   const provider = new anchor.AnchorProvider(connection, wallet, {});
   const program = new anchor.Program(idlFile, programID, provider);
-  const userInfo = await getUserInfoPDA();
+  const userInfo = await getUserInfoPDA(wallet);
   const [presaleVault] = await getVaultPDA();
   const [presalePDA] = await getPresalePDA();
   //   const presaleVault = new PublicKey(
@@ -47,12 +43,17 @@ export const buyToken = async (
     "\nassociatedTokenProgram:",
     ASSOCIATED_TOKEN_PROGRAM_ID.toBase58()
   );
+  // tokenAmount = tokenAmount * LAMPORTS_PER_SOL;
+  quoteAmount = quoteAmount * LAMPORTS_PER_SOL;
+  console.log(quoteAmount);
+  console.log(new anchor.BN(quoteAmount));
+  console.log(new anchor.BN(quoteAmount));
+  // const tokenAmountInLamports = new anchor.BN(tokenAmount);
+  // const quoteAmountInLamports = new anchor.BN(quoteAmount);
+  // new anchor.BN(tokenAmount),
   try {
     const transaction = await program.methods
-      .buyToken(
-        new anchor.BN(tokenAmount * LAMPORTS_PER_SOL),
-        new anchor.BN(quoteAmount * LAMPORTS_PER_SOL)
-      )
+      .buyToken(new anchor.BN(quoteAmount))
       .accounts({
         presaleInfo: presalePDA,
         presaleAuthority: presaleAuthority, //use the wallet that created the presale.
@@ -69,7 +70,7 @@ export const buyToken = async (
       "claim Test successful: ",
       `https://explorer.solana.com/tx/${transaction}?cluster=devnet`
     );
-  } catch (error: any) {
+  } catch (error: any | unknown) {
     console.error("could not buy tokens: ", error.message);
   }
 };

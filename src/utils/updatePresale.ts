@@ -2,7 +2,7 @@ import { connection, idlFile, programID } from "@/constants";
 import { AnchorProvider, Program } from "@project-serum/anchor";
 import { AnchorWallet } from "@solana/wallet-adapter-react";
 import * as anchor from "@project-serum/anchor";
-import { SystemProgram } from "@solana/web3.js";
+import { SystemProgram, LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { getPresalePDA } from "./helpers";
 
 export const updatePresale = async (
@@ -15,6 +15,10 @@ export const updatePresale = async (
   endTime: number,
   wallet: AnchorWallet
 ) => {
+  maxTokenAmountPerAddress = maxTokenAmountPerAddress * LAMPORTS_PER_SOL;
+  pricePerToken = pricePerToken * LAMPORTS_PER_SOL;
+  softcapAmount = softcapAmount * LAMPORTS_PER_SOL;
+  hardcapAmount = hardcapAmount * LAMPORTS_PER_SOL;
   console.log("start:", startTime);
   console.log("end: ", endTime);
   const provider = new AnchorProvider(connection, wallet, {});
@@ -40,7 +44,7 @@ export const updatePresale = async (
       "claim Test successful: ",
       `https://explorer.solana.com/tx/${transaction}?cluster=devnet`
     );
-  } catch (error: any) {
+  } catch (error: any | unknown) {
     console.error("test faied: ", error.message);
   }
 };

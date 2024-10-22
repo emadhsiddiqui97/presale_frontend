@@ -1,36 +1,36 @@
 "use client";
 import useIsMounted from "@/utils/useIsMounted";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
-import { useAnchorWallet } from "@solana/wallet-adapter-react";
-import React, { useEffect, useState } from "react";
-import { testFunction } from "@/utils/test";
+import { AnchorWallet, useAnchorWallet } from "@solana/wallet-adapter-react";
+// import React, { useState } from "react";
+// import { testFunction } from "@/utils/test";
 // import { testFunction } from "@/utils/createPresale";
-import { depositToken } from "@/utils/depositTokens";
-import InputComponent from "./InputComponent";
-import { claimTokenTest } from "@/utils/claimtokenTest";
-import { updatePresale } from "@/utils/updatePresale";
-import { claimToken } from "@/utils/claimToken";
-import { PublicKey } from "@solana/web3.js";
-import { startPresale } from "@/utils/startPresale";
+// import { depositToken } from "@/utils/depositTokens";
+// import InputComponent from "./InputComponent";
+// import { claimTokenTest } from "@/utils/claimtokenTest";
+// import { updatePresale } from "@/utils/updatePresale";
+// import { claimToken } from "@/utils/claimToken";
+// import { PublicKey } from "@solana/web3.js";
+// import { startPresale } from "@/utils/startPresale";
 // import { programInfoPubKey } from "@/constants";
-import { buyToken } from "@/utils/buyToken";
-import Button from "./button";
-import { createPresale } from "@/utils/createPresale";
-import { getAdminAta, getPresalePDA } from "@/utils/helpers";
-import { withdrawSol } from "@/utils/withdrawSol";
-import { withdrawToken } from "@/utils/withdrawToken";
-import TestComponent from "./TestComponent";
+// import { buyToken } from "@/utils/buyToken";
+// import Button from "./button";
+// import { createPresale } from "@/utils/createPresale";
+// import { getAdminAta, getPresalePDA } from "@/utils/helpers";
+// import { withdrawSol } from "@/utils/withdrawSol";
+// import { withdrawToken } from "@/utils/withdrawToken";
+// import TestComponent from "./TestComponent";
 import BuyToken from "./BuyToken";
 
-("./InputComponent");
+// ("./InputComponent");
 // import InputComponent from "./InputComponent";
 
 const HomePage = () => {
-  const [mintAccount, setMintAccount] = useState("");
-  const [amount, setAmount] = useState("");
+  // const [mintAccount, setMintAccount] = useState("");
+  // const [amount, setAmount] = useState("");
   // const [tokenProgramId, settokenProgramId] = useState("");
   const mounted = useIsMounted();
-  const wallet: any = useAnchorWallet();
+  const wallet: any | AnchorWallet = useAnchorWallet();
 
   const test = () => {
     // console.log(Date.now());
@@ -69,9 +69,9 @@ const HomePage = () => {
     // buyToken(wallet, 1000000000, 2000000000);
   };
 
-  const tokenAddress: PublicKey = new PublicKey(
-    "2XbxVjY7C6WNbXs8jFynBpCdAxLBXaFExf3ZVDYb1PYW"
-  );
+  // const tokenAddress: PublicKey | any = new PublicKey(
+  //   "2XbxVjY7C6WNbXs8jFynBpCdAxLBXaFExf3ZVDYb1PYW"
+  // );
   return (
     <div
       className={`flex min-w-screen justify-center items-center bg-slate-900 ${

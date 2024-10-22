@@ -3,26 +3,26 @@ import React, { useState } from "react";
 import InputComponent from "./InputComponent";
 import { buyToken } from "@/utils/buyToken";
 import Button from "./button";
-import { useAnchorWallet } from "@solana/wallet-adapter-react";
-import { PublicKey } from "@solana/web3.js";
+import { AnchorWallet, useAnchorWallet } from "@solana/wallet-adapter-react";
+// import { PublicKey } from "@solana/web3.js";
 
 const BuyToken = () => {
-  const [tokenAmount, setTokenAmount] = useState("");
+  // const [tokenAmount, setTokenAmount] = useState("");
   const [quoteAmount, setQuoteAmount] = useState("");
-  const wallet: any = useAnchorWallet();
+  const wallet: any | AnchorWallet = useAnchorWallet();
 
-  const tokenAddress: PublicKey = new PublicKey(
-    "2XbxVjY7C6WNbXs8jFynBpCdAxLBXaFExf3ZVDYb1PYW"
-  );
+  // const tokenAddress: PublicKey = new PublicKey(
+  //   "2XbxVjY7C6WNbXs8jFynBpCdAxLBXaFExf3ZVDYb1PYW"
+  // );
 
   return (
     <div className="max-w-md space-y-4 m-4 p-4">
-      <InputComponent
+      {/* <InputComponent
         type="text"
         label="Token Amount"
-        onChange={setTokenAmount}
+        onChange={()=>{setTokenAmount}}
         value={tokenAmount}
-      />
+      /> */}
       <InputComponent
         type="number"
         label="Quote Amount"
@@ -36,7 +36,7 @@ const BuyToken = () => {
         //   }`}
         name="Buy Tokens"
         onClick={() => {
-          buyToken(wallet, parseInt(tokenAmount), parseInt(quoteAmount));
+          buyToken(wallet, parseInt(quoteAmount));
         }}
         //   disabled={wallet ? false : true}
       />

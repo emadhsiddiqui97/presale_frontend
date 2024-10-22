@@ -91,10 +91,7 @@
         { "name": "tokenProgram", "isMut": false, "isSigner": false },
         { "name": "associatedTokenProgram", "isMut": false, "isSigner": false }
       ],
-      "args": [
-        { "name": "tokenAmount", "type": "u64" },
-        { "name": "quoteAmount", "type": "u64" }
-      ]
+      "args": [{ "name": "quoteAmount", "type": "u64" }]
     },
     {
       "name": "claimToken",
@@ -171,6 +168,14 @@
       "accounts": [
         { "name": "presaleInfo", "isMut": true, "isSigner": false },
         { "name": "authority", "isMut": true, "isSigner": true }
+      ],
+      "args": []
+    },
+    {
+      "name": "getPresaleInfo",
+      "accounts": [
+        { "name": "presaleInfo", "isMut": true, "isSigner": false },
+        { "name": "userInfo", "isMut": true, "isSigner": false }
       ],
       "args": []
     }

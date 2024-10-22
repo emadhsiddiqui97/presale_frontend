@@ -3,8 +3,8 @@ import {
   createAssociatedTokenAccountInstruction,
   getAssociatedTokenAddress,
   getOrCreateAssociatedTokenAccount,
-  TOKEN_2022_PROGRAM_ID,
-  TOKEN_PROGRAM_ID,
+  // TOKEN_2022_PROGRAM_ID,
+  // TOKEN_PROGRAM_ID,
 } from "@solana/spl-token";
 import * as anchor from "@project-serum/anchor";
 import { AnchorWallet } from "@solana/wallet-adapter-react";
@@ -13,10 +13,10 @@ import {
   SYSVAR_RENT_PUBKEY,
   SystemProgram,
   Transaction,
-  SendTransactionError,
+  // SendTransactionError,
 } from "@solana/web3.js";
 import {
-  getAdminAta,
+  // getAdminAta,
   getPresalePDA,
   getUserInfoPDA,
   getVaultPDA,
@@ -25,7 +25,7 @@ import {
   adminKeyPair,
   connection,
   idlFile,
-  presaleAuthority,
+  // presaleAuthority,
   privateKey,
   programID,
   tokenProgramID,
@@ -88,8 +88,8 @@ export const claimToken = async (
   ).address;
 
   // const presalePresaleTokenAta = await getOrCreateAssociatedTokenAccount(tokenAddress, adminKeyPair,presalePDA, true)
-  const userInfoPDA = await getUserInfoPDA();
-  const [presaleVault] = await getVaultPDA();
+  const userInfoPDA = await getUserInfoPDA(wallet);
+  // const [presaleVault] = await getVaultPDA();
 
   const provider = new AnchorProvider(connection, wallet, {});
   const program = new Program(idlFile, programID, provider);
@@ -122,7 +122,7 @@ export const claimToken = async (
     bump
   );
 
-  const bru = new PublicKey("BcDPzpNmrnsnZZS3VxJripApoymLFSMb5LLwa4gPkBrU");
+  // const bru = new PublicKey("BcDPzpNmrnsnZZS3VxJripApoymLFSMb5LLwa4gPkBrU");
   try {
     const transactionIns = await program.methods
       .claimToken(new anchor.BN(bump))
@@ -153,7 +153,7 @@ export const claimToken = async (
       confirmedTransaction
       // `https://explorer.solana.com/tx/${transaction}?cluster=devnet`
     );
-  } catch (error: any) {
+  } catch (error: any | unknown) {
     console.error("Failed to claim Tokens: ", error.message);
     // if (error instanceof SendTransactionError) {
     //   const logs = await error.getLogs(connection);

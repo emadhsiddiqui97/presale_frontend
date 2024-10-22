@@ -1,10 +1,10 @@
 import { connection, idlFile, programID } from "@/constants";
 import { AnchorProvider, Program } from "@project-serum/anchor";
 import { AnchorWallet } from "@solana/wallet-adapter-react";
-import { PublicKey, SystemProgram } from "@solana/web3.js";
+import { PublicKey, SystemProgram, LAMPORTS_PER_SOL } from "@solana/web3.js";
 import * as anchor from "@project-serum/anchor";
-import idl from "./idl.json";
-import { findProgramAddressSync } from "@project-serum/anchor/dist/cjs/utils/pubkey";
+// import idl from "./idl.json";
+// import { findProgramAddressSync } from "@project-serum/anchor/dist/cjs/utils/pubkey";
 import { getPresalePDA } from "./helpers";
 
 export async function createPresale(
@@ -17,9 +17,14 @@ export async function createPresale(
   endTime: number,
   authority: AnchorWallet
 ) {
+  softcapAmount = softcapAmount * LAMPORTS_PER_SOL;
+  hardcapAmount = hardcapAmount * LAMPORTS_PER_SOL;
+  maxTokenAmountPerAddress = maxTokenAmountPerAddress * LAMPORTS_PER_SOL;
+  pricePerToken = pricePerToken * LAMPORTS_PER_SOL;
+
   // const PRESALE_SEED = "NEW_UNIQUE_PRESALE_SEED";
   // let idlFile: any = idl;
-  let provider = new AnchorProvider(connection, authority, {});
+  const provider = new AnchorProvider(connection, authority, {});
   const program = new Program(idlFile, programID, provider);
   // const [newPresaleInfo] = await findProgramAddressSync(
   //   [Buffer.from(PRESALE_SEED)],
@@ -63,6 +68,7 @@ export async function createPresale(
     // console.log(provider.wallet);
     // Create presale transaction using Anchor
     const [presalePDA] = await getPresalePDA();
+    console.log("presale info: ", presalePDA.toBase58());
     const transaction = await program.methods
       .createPresale(
         tokenMintAddress,
@@ -87,7 +93,7 @@ export async function createPresale(
       "Presale created successfully: ",
       `https://explorer.solana.com/tx/${transaction}?cluster=devnet`
     );
-  } catch (e: any) {
+  } catch (e: any | unknown) {
     // toast.error(`Error during presale creation: ${e.message}`);
     console.error("Error during presale creation:", e.message);
   }

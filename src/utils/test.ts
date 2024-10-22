@@ -5,46 +5,44 @@ import {
   // systemProgram,
 } from "@/constants";
 import { AnchorProvider, Program } from "@project-serum/anchor";
-import * as anchor from "@project-serum/anchor";
+// import * as anchor from "@project-serum/anchor";
 
-import { findProgramAddressSync } from "@project-serum/anchor/dist/cjs/utils/pubkey";
+// import { findProgramAddressSync } from "@project-serum/anchor/dist/cjs/utils/pubkey";
 import {
-  ASSOCIATED_TOKEN_PROGRAM_ID,
+  // ASSOCIATED_TOKEN_PROGRAM_ID,
   getAssociatedTokenAddress,
-  getAssociatedTokenAddressSync,
-  getMint,
+  // getAssociatedTokenAddressSync,
+  // getMint,
   getOrCreateAssociatedTokenAccount,
 } from "@solana/spl-token";
 import { AnchorWallet } from "@solana/wallet-adapter-react";
 import {
-  AccountInfo,
+  // AccountInfo,
   PublicKey,
   Keypair,
   SYSVAR_RENT_PUBKEY,
 } from "@solana/web3.js";
 import idl from "./idl.json";
-import { IdlType } from "@project-serum/anchor/dist/cjs/idl";
-import {
-  TOKEN_PROGRAM_ID,
-  createMint,
-  //  getAssociatedTokenAddress,
-  //  getOrCreateAssociatedTokenAccount,
-  mintTo,
-} from "@solana/spl-token";
-import {
-  //  PublicKey,
-  Connection,
-  //  Keypair,
-  LAMPORTS_PER_SOL,
-  sendAndConfirmTransaction,
-  SystemProgram,
-  //  SYSVAR_RENT_PUBKEY,
-} from "@solana/web3.js";
+// import { IdlType } from "@project-serum/anchor/dist/cjs/idl";
+import // TOKEN_PROGRAM_ID,
+// createMint,/
+//  getAssociatedTokenAddress,
+//  getOrCreateAssociatedTokenAccount,
+// mintTo,
+"@solana/spl-token";
+import //  PublicKey,
+// Connection,
+//  Keypair,
+// LAMPORTS_PER_SOL,
+// sendAndConfirmTransaction,
+// SystemProgram,
+//  SYSVAR_RENT_PUBKEY,
+"@solana/web3.js";
 //  import anch/or from "@coral-xyz/anchor";
 //  import { Program, web3 } from "@coral-xyz/anchor";
 
 export const testFunction = async (
-  mintAddress: string,
+  // mintAddress: string,
   // presalePda: any,
   wallet: AnchorWallet
 ) => {
@@ -64,7 +62,6 @@ export const testFunction = async (
   const USER_SEED = "USER_SEED";
   // const program = anchor.workspace.PalmPresale as Program<PalmPresale>;
   const PROGRAM_ID = program.programId;
-  Keypair;
 
   console.log(SYSVAR_RENT_PUBKEY.toBase58());
 
@@ -90,10 +87,10 @@ export const testFunction = async (
   //   "confirmed"
   // );
 
-  async function getAdminAta(mintAddress: any, admin: any) {
-    let adminAta;
-    let adminSgner: any = adminPubkey;
-    adminAta = (
+  async function getAdminAta(mintAddress: PublicKey) {
+    //  adminAta;
+    let adminSgner: any | unknown = adminPubkey;
+    const adminAta = (
       await getOrCreateAssociatedTokenAccount(
         connection,
         adminSgner,

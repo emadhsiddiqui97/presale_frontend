@@ -1,4 +1,4 @@
-import { Program } from "@project-serum/anchor";
+// import { Program } from "@project-serum/anchor";
 import idl from "./utils/idl.json";
 import { Connection, PublicKey, clusterApiUrl, Keypair } from "@solana/web3.js";
 import { bs58 } from "@project-serum/anchor/dist/cjs/utils/bytes";
@@ -11,8 +11,10 @@ export const connection = new Connection(
   commitmentLevel
 );
 export const programID = new PublicKey(
-  "6RdWeathhyGS625o2yAMabLEhyN3WasXfAbR3Hw7CnS9"
+  "FRMQYATyZj2G11WBdTKbgVm3bf8MCckukuTyWw6XrgW9"
 );
+
+//   "6RdWeathhyGS625o2yAMabLEhyN3WasXfAbR3Hw7CnS9" //
 // export const programInfoPubKey = new PublicKey(
 //   "HwZzAPaUtbaC6jKAqrhoS5DjMeqKbj3vAup6c26BeQqo"
 // );
@@ -35,9 +37,14 @@ export const presaleAuthority = new PublicKey(
   "FQMQ2Damu3FfcM439nJ8n2hDmNr1g4DJfTfYBtDPnKJY"
 ); //wallet address of the preson who created the presale
 
+// export const tokenAddress = new PublicKey(
+//   "2XbxVjY7C6WNbXs8jFynBpCdAxLBXaFExf3ZVDYb1PYW"
+// );
+
 export const tokenAddress = new PublicKey(
-  "2XbxVjY7C6WNbXs8jFynBpCdAxLBXaFExf3ZVDYb1PYW"
+  "2ZqcLdeBxd3nVPKjVtQAhXgFNjRH5NyfYmkHKffG4kpo"
 );
+
 export const tokenAta = new PublicKey(
   "BcDPzpNmrnsnZZS3VxJripApoymLFSMb5LLwa4gPkBrU"
 );

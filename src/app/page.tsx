@@ -12,7 +12,7 @@ import {
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 
 export default function Home() {
-  const phantomWallet: any = new PhantomWalletAdapter();
+  const phantomWallet: any | unknown = new PhantomWalletAdapter();
 
   return (
     <ConnectionProvider endpoint={endPoint}>

@@ -1,25 +1,26 @@
 import {
-  commitmentLevel,
+  // commitmentLevel,
   connection,
+  privateKey,
   programID,
   // systemProgram,
 } from "@/constants";
 import { AnchorProvider, Idl, Program } from "@project-serum/anchor";
-import { findProgramAddressSync } from "@project-serum/anchor/dist/cjs/utils/pubkey";
+// import { findProgramAddressSync } from "@project-serum/anchor/dist/cjs/utils/pubkey";
 import {
   getAssociatedTokenAddress,
-  getMint,
+  // getMint,
   getOrCreateAssociatedTokenAccount,
   ASSOCIATED_TOKEN_PROGRAM_ID,
   TOKEN_PROGRAM_ID,
-  TOKEN_2022_PROGRAM_ID,
+  // TOKEN_2022_PROGRAM_ID,
 } from "@solana/spl-token";
-import { PublicKey, SystemProgram } from "@solana/web3.js";
+import { PublicKey, SystemProgram, LAMPORTS_PER_SOL } from "@solana/web3.js";
 import idlFile from "./idl.json";
 import * as anchor from "@project-serum/anchor";
-import { IdlType } from "@project-serum/anchor/dist/cjs/idl";
-import { AnchorWallet, useAnchorWallet } from "@solana/wallet-adapter-react";
-import { publicKey } from "@project-serum/anchor/dist/cjs/utils";
+// import { IdlType } from "@project-serum/anchor/dist/cjs/idl";
+import { AnchorWallet } from "@solana/wallet-adapter-react";
+// import { publicKey } from "@project-serum/anchor/dist/cjs/utils";
 import { getPresalePDA, getVaultPDA } from "./helpers";
 
 // const PRESALE_VAULT = "PRESALE_VAULT";
@@ -71,9 +72,10 @@ export const depositToken = async (
   /* the Associated token is account is found using the spl-token library. 
   fromAssociatedTokenAccount has the user wallet public as the first argument and the mint address as the second argument. toAssociatedTokenAccount has the mint address as the first argument and the wallet public as the second argument
   */
-  let wallet = anchorWallet.publicKey;
-  let idl: any = idlFile;
-  let mintKey: PublicKey = new PublicKey(mintAddress); //convert the mintAddress to a publicKey
+  // let wallet = anchorWallet.publicKey;
+  const idl: any | unknown = idlFile;
+  const mintKey: PublicKey = new PublicKey(mintAddress); //convert the mintAddress to a publicKey
+  amount = amount * LAMPORTS_PER_SOL;
   // let fromAssociatedTokenAccount: PublicKey = await getAssociatedTokenAddress(
   //   wallet,
   //   mintKey
@@ -140,7 +142,7 @@ export const depositToken = async (
   // let systemProgramid = new anchor.BN(systemProgram);
   // let tokenProgramIdbn = new anchor.BN(tokenProgramId);
   // associatedTokenProgram = new anchor.BN(associatedTokenProgram);
-  const walletSigner: any = anchorWallet.publicKey;
+  // const walletSigner: any = anchorWallet.publicKey;
   // const walletSigner: any = new PublicKey(
   //   "4axqzGngUCF1wf9Qkhjge7j64TXCDrRK4shtYek8xFQb"
   // ).toBase58();
@@ -148,14 +150,14 @@ export const depositToken = async (
   const adminAta = (
     await getOrCreateAssociatedTokenAccount(
       connection,
-      walletSigner,
+      privateKey,
       mintKey,
-      anchorWallet.publicKey
+      privateKey.publicKey
     )
   ).address;
   const [presalePDA] = await getPresalePDA();
   const toAta = await getAssociatedTokenAddress(mintKey, presalePDA, true);
-  const [presaleVault, bump] = await getVaultPDA();
+  const [presaleVault] = await getVaultPDA();
 
   console.log(
     "mintKey",
@@ -197,7 +199,7 @@ export const depositToken = async (
     const transaction = await program.methods
       .depositToken(new anchor.BN(amount))
       .accounts({
-        mintAccount: mintKey.toBase58(),
+        mintAccount: mintKey,
         fromAssociatedTokenAccount: adminAta,
         fromAuthority: anchorWallet.publicKey,
         toAssociatedTokenAccount: toAta,
@@ -214,7 +216,7 @@ export const depositToken = async (
       "Token deposited successfully: ",
       `https://explorer.solana.com/tx/${transaction}?cluster=devnet`
     );
-  } catch (error: any) {
+  } catch (error: any | unknown) {
     if (error) console.error("Could not deposit tokens:", error.message);
   }
 };

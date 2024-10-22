@@ -2,7 +2,7 @@ import { connection, idlFile, programID } from "@/constants";
 import { AnchorProvider, Program } from "@project-serum/anchor";
 // import { publicKey } from "@project-serum/anchor/dist/cjs/utils";
 import { AnchorWallet } from "@solana/wallet-adapter-react";
-import { PublicKey } from "@solana/web3.js";
+// import { PublicKey } from "@solana/web3.js";
 
 export const claimTokenTest = async (
   wallet: AnchorWallet,
@@ -21,7 +21,7 @@ export const claimTokenTest = async (
       "claim Test successful: ",
       `https://explorer.solana.com/tx/${transaction}?cluster=devnet`
     );
-  } catch (error: any) {
+  } catch (error: any | unknown) {
     console.error("test faied: ", error.message);
   }
 };

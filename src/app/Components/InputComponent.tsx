@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, FC } from "react";
+import React, { FC } from "react";
 import { inputProps } from "./component.type";
 
 const InputComponent: FC<inputProps> = ({ label, type, onChange, value }) => {
