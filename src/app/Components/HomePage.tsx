@@ -19,8 +19,10 @@ import { AnchorWallet, useAnchorWallet } from "@solana/wallet-adapter-react";
 // import { getAdminAta, getPresalePDA } from "@/utils/helpers";
 // import { withdrawSol } from "@/utils/withdrawSol";
 // import { withdrawToken } from "@/utils/withdrawToken";
-// import TestComponent from "./TestComponent";
+import TestComponent from "./TestComponent";
 import BuyToken from "./BuyToken";
+import { adminWallet } from "@/constants";
+import ClaimToken from "./ClaimToken";
 
 // ("./InputComponent");
 // import InputComponent from "./InputComponent";
@@ -31,6 +33,17 @@ const HomePage = () => {
   // const [tokenProgramId, settokenProgramId] = useState("");
   const mounted = useIsMounted();
   const wallet: any | AnchorWallet = useAnchorWallet();
+
+  const admin = (wallet: AnchorWallet) => {
+    return wallet.publicKey.toBase58() === adminWallet.toBase58() ? (
+      <TestComponent />
+    ) : (
+      <div className="space-y-4">
+        <BuyToken />
+        <ClaimToken />
+      </div>
+    );
+  };
 
   const test = () => {
     // console.log(Date.now());
@@ -81,8 +94,9 @@ const HomePage = () => {
       <div className="flex flex-col max-w-md space-y-4 m-4 p-4 bg-slate-800 rounded-md">
         {wallet && (
           <>
+            {admin(wallet)}
             {/* <TestComponent /> */}
-            <BuyToken />
+            {/* <BuyToken /> */}
           </>
         )}
         <div className="flex justify-center">

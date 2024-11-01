@@ -11,9 +11,12 @@ export const connection = new Connection(
   commitmentLevel
 );
 export const programID = new PublicKey(
-  "FRMQYATyZj2G11WBdTKbgVm3bf8MCckukuTyWw6XrgW9"
+  "9GjY2rnKN32itbFCFq4mrcSrZBQnZr3wguweBAWGfJ9M"
 );
+// "9dsuhxWsryH8SMksMxyKPByMWTmPXc6Zg5wZBicve9td"
+// "ALbzY7t1rKTW96EmGUKxrmtHfrbsjDmAsqGB5NL2EHiB"
 
+// "FRMQYATyZj2G11WBdTKbgVm3bf8MCckukuTyWw6XrgW9"
 //   "6RdWeathhyGS625o2yAMabLEhyN3WasXfAbR3Hw7CnS9" //
 // export const programInfoPubKey = new PublicKey(
 //   "HwZzAPaUtbaC6jKAqrhoS5DjMeqKbj3vAup6c26BeQqo"
@@ -42,8 +45,9 @@ export const presaleAuthority = new PublicKey(
 // );
 
 export const tokenAddress = new PublicKey(
-  "2ZqcLdeBxd3nVPKjVtQAhXgFNjRH5NyfYmkHKffG4kpo"
+  "3HibiyP3xyf2C1mqy9k5eMkEM4VbJY68MovU6vVeAiFb"
 );
+// "H6CQNt594c6A4tKNqnSghF73LdUbdvJ1sTn5Hn1JkL8q"
 
 export const tokenAta = new PublicKey(
   "BcDPzpNmrnsnZZS3VxJripApoymLFSMb5LLwa4gPkBrU"
@@ -61,6 +65,10 @@ export const adminKeyPair = Keypair.fromSecretKey(
 
 export const privateKey = Keypair.fromSecretKey(
   bs58.decode(
-    "41mjWEU6cYqiCyYvnSbMh7TnZSZmnzfoFagHyioZvUCyxYyq2hfvPbgQvguwmpDEXmW4VjkcNykWhu8yXqrcJY6t"
+    "4pjhxuQM28a4Nbcp5zvh3igQKiFuT81eSurE7NyY9DdM6HCMK8btf7VjDkDLAthDKeqAJESbXYwaCtn5NsGwFEi8"
   )
+);
+
+export const adminWallet = new PublicKey(
+  "EvTAmStgVeSAKGwgeZHJrJ4F9rMFSFVWMC6jBTbkXhL8"
 );

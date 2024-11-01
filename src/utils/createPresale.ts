@@ -38,14 +38,14 @@ export async function createPresale(
     // const authorityPubkey: PublicKey = authority.publicKey;
 
     // Convert amounts to anchor.BN if needed
-    const softcapBN = new anchor.BN(softcapAmount);
-    const hardcapBN = new anchor.BN(hardcapAmount);
-    const maxTokenBN = new anchor.BN(maxTokenAmountPerAddress);
-    const priceBN = new anchor.BN(pricePerToken);
+    const softcapBN = new anchor.BN(JSON.stringify(softcapAmount));
+    const hardcapBN = new anchor.BN(JSON.stringify(hardcapAmount));
+    const maxTokenBN = new anchor.BN(JSON.stringify(maxTokenAmountPerAddress));
+    const priceBN = new anchor.BN(JSON.stringify(pricePerToken));
 
     // Convert startTime and endTime to anchor.BN
-    const startTimeBN = new anchor.BN(startTime);
-    const endTimeBN = new anchor.BN(endTime);
+    const startTimeBN = new anchor.BN(JSON.stringify(startTime));
+    const endTimeBN = new anchor.BN(JSON.stringify(endTime));
 
     console.log(
       tokenMintAddress.toBase58(),

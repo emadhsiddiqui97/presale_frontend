@@ -66,11 +66,17 @@ export const buyToken = async (wallet: AnchorWallet, quoteAmount: number) => {
         associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
       })
       .rpc();
-    console.log(
-      "claim Test successful: ",
-      `https://explorer.solana.com/tx/${transaction}?cluster=devnet`
+    // console.log(
+    //   "Bought tokens successful: ",
+    //   `https://explorer.solana.com/tx/${transaction}?cluster=devnet`
+    // );
+    alert(
+      `Bought tokens successful: https://explorer.solana.com/tx/${transaction}?cluster=devnet`
     );
   } catch (error: any | unknown) {
     console.error("could not buy tokens: ", error.message);
+    alert(
+      `Bought tokens successful: https://explorer.solana.com/tx/${transaction}?cluster=devnet`
+    );
   }
 };

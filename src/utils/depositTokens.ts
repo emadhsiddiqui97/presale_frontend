@@ -194,7 +194,20 @@ export const depositToken = async (
     "associated token program",
     ASSOCIATED_TOKEN_PROGRAM_ID.toBase58()
   );
-
+  // const log = {
+  //   mintAccount: mintKey,
+  //   fromAssociatedTokenAccount: adminAta,
+  //   fromAuthority: anchorWallet.publicKey,
+  //   toAssociatedTokenAccount: toAta,
+  //   presaleVault: presaleVault,
+  //   presaleInfo: presalePDA,
+  //   admin: anchorWallet.publicKey,
+  //   rent: anchor.web3.SYSVAR_RENT_PUBKEY,
+  //   systemProgram: SystemProgram.programId,
+  //   tokenProgram: TOKEN_PROGRAM_ID,
+  //   associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
+  // };
+  // console.log(JSON.stringify(log));
   try {
     const transaction = await program.methods
       .depositToken(new anchor.BN(amount))

@@ -21,7 +21,7 @@ export const startPresale = async (
       })
       .rpc();
     console.log(
-      "claim Test successful: ",
+      "Presale: ",
       `https://explorer.solana.com/tx/${transaction}?cluster=devnet`
     );
   } catch (error: any | unknown) {

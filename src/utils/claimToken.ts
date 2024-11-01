@@ -33,15 +33,13 @@ import {
 import { AnchorProvider, Program } from "@project-serum/anchor";
 // import { getOrCreateAssociatedTokenAccount } from "@solana/spl-token";
 
-export const claimToken = async (
-  tokenAddress: PublicKey,
-  wallet: AnchorWallet
-) => {
+export const claimToken = async (token: string, wallet: AnchorWallet) => {
   // const tokenAta = await getAssociatedTokenAddress(
   //   tokenAddress,
   //   wallet.publicKey,
   //   true
   // );
+  const tokenAddress = new PublicKey(token);
   const [presalePDA, bump] = await getPresalePDA();
   // const tokenAta = await getAdminAta(tokenAddress);
   const tokenAta = await getAssociatedTokenAddress(

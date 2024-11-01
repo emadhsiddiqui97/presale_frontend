@@ -13,6 +13,9 @@ import { withdrawSol } from "@/utils/withdrawSol";
 import { withdrawToken } from "@/utils/withdrawToken";
 import { tokenAddress } from "@/constants";
 import { getPresaleInfo } from "@/utils/getPresaleInfo";
+import CreatePresale from "./CreatePresale";
+import DepositToken from "./DepositToken";
+import StartPresale from "./StartPresale";
 
 const TestComponent = () => {
   // const tokenAddress:PublicKey = tokenAddress;
@@ -32,7 +35,8 @@ const TestComponent = () => {
           await getPresaleInfo(wallet);
         }}
       />
-      <Button
+
+      {/* <Button
         name="Create Presale"
         onClick={async () => {
           await createPresale(
@@ -46,20 +50,22 @@ const TestComponent = () => {
             wallet
           );
         }}
-      />
-      <Button
+      /> */}
+      <CreatePresale />
+      {/* <Button
         name="Deposit Token"
         onClick={async () => {
           await depositToken(tokenAddress.toBase58(), 5000, wallet);
         }}
-      />
+      /> */}
+      <DepositToken />
       <Button
         name="Buy Token"
         onClick={async () => {
-          await buyToken(wallet, 2);
+          await buyToken(wallet, 1);
         }}
       />
-      <Button
+      {/* <Button
         name="Start Presale"
         onClick={async () => {
           await startPresale(
@@ -68,7 +74,8 @@ const TestComponent = () => {
             wallet
           );
         }}
-      />
+      /> */}
+      <StartPresale />
       <Button
         name="Update Presale"
         onClick={async () => {
@@ -78,8 +85,25 @@ const TestComponent = () => {
             0.0000002,
             5000,
             new Date().getTime(),
+            // new Date().getTime(),
+            // new Date().getTime() + 2630016000,
+            1761660603000,
+            wallet
+          );
+        }}
+      />
+      <Button
+        name="End Presale"
+        onClick={async () => {
+          await updatePresale(
+            10000,
+            1,
+            0.0000002,
+            5000,
+            new Date().getTime(),
             new Date().getTime(),
             // new Date().getTime() + 2630016000,
+            // 1761660603000,
             wallet
           );
         }}
