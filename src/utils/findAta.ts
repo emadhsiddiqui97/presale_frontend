@@ -7,7 +7,7 @@ import {
 import { AnchorWallet } from "@solana/wallet-adapter-react";
 import { PublicKey } from "@solana/web3.js";
 import { connection } from "../constants";
-import { publicKey } from "@coral-xyz/anchor/dist/cjs/utils";
+// import { publicKey } from "@coral-xyz/anchor/dist/cjs/utils";
 
 export const findAta = async (tokenAddress: PublicKey, wallet: PublicKey) => {
   const ata = await getAssociatedTokenAddress(tokenAddress, wallet, true);

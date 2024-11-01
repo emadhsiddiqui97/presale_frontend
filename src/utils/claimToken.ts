@@ -31,6 +31,7 @@ import {
   tokenProgramID,
 } from "@/constants";
 import { AnchorProvider, Program } from "@project-serum/anchor";
+import { isStringObject } from "util/types";
 // import { getOrCreateAssociatedTokenAccount } from "@solana/spl-token";
 
 export const claimToken = async (token: string, wallet: AnchorWallet) => {
@@ -39,7 +40,12 @@ export const claimToken = async (token: string, wallet: AnchorWallet) => {
   //   wallet.publicKey,
   //   true
   // );
+  // let tokenAddress: any;
+  // if (isStringObject(token)) {
   const tokenAddress = new PublicKey(token);
+  // } else {
+  //   tokenAddress = token;
+  // }
   const [presalePDA, bump] = await getPresalePDA();
   // const tokenAta = await getAdminAta(tokenAddress);
   const tokenAta = await getAssociatedTokenAddress(

@@ -111,7 +111,7 @@ const TestComponent = () => {
       <Button
         name="Claim Token"
         onClick={async () => {
-          await claimToken(tokenAddress, wallet);
+          await claimToken(JSON.stringify(tokenAddress), wallet);
         }}
       />
       <Button
