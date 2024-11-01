@@ -34,7 +34,10 @@ import { AnchorProvider, Program } from "@project-serum/anchor";
 import { isStringObject } from "util/types";
 // import { getOrCreateAssociatedTokenAccount } from "@solana/spl-token";
 
-export const claimToken = async (token: string, wallet: AnchorWallet) => {
+export const claimToken = async (
+  tokenAddress: PublicKey,
+  wallet: AnchorWallet
+) => {
   // const tokenAta = await getAssociatedTokenAddress(
   //   tokenAddress,
   //   wallet.publicKey,
@@ -42,7 +45,7 @@ export const claimToken = async (token: string, wallet: AnchorWallet) => {
   // );
   // let tokenAddress: any;
   // if (isStringObject(token)) {
-  const tokenAddress = new PublicKey(token);
+  // const tokenAddress = new PublicKey(token);
   // } else {
   //   tokenAddress = token;
   // }

@@ -19,7 +19,7 @@ const ClaimToken = () => {
       <Button
         name="Deposit Token"
         onClick={async () => {
-          await claimToken(tokenAddress, wallet);
+          // await claimToken(tokenAddress, wallet);
         }}
       />
     </div>
