@@ -21,8 +21,10 @@ import { AnchorWallet, useAnchorWallet } from "@solana/wallet-adapter-react";
 // import { withdrawToken } from "@/utils/withdrawToken";
 import TestComponent from "./TestComponent";
 import BuyToken from "./BuyToken";
-import { adminWallet } from "@/constants";
+import { adminWallet, tokenAddress } from "@/constants";
 import ClaimToken from "./ClaimToken";
+import Button from "./button";
+import { claimToken } from "@/utils/claimToken";
 
 // ("./InputComponent");
 // import InputComponent from "./InputComponent";
@@ -40,7 +42,13 @@ const HomePage = () => {
     ) : (
       <div className="space-y-4">
         <BuyToken />
-        <ClaimToken />
+        {/* <ClaimToken /> */}
+        <Button
+          name="Claim Token"
+          onClick={async () => {
+            await claimToken(tokenAddress, wallet);
+          }}
+        />
       </div>
     );
   };
