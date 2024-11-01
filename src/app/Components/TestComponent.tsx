@@ -108,12 +108,12 @@ const TestComponent = () => {
           );
         }}
       />
-      <Button
+      {/* <Button
         name="Claim Token"
         onClick={async () => {
           await claimToken(JSON.stringify(tokenAddress), wallet);
         }}
-      />
+      /> */}
       <Button
         name="Withdraw Sol"
         onClick={async () => {
